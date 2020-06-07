@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "razor-payments"
+    }
+  },
+  "defaultProject": "razor-payments",
+  "cli": {
+    "analytics": "3384daed-a84f-4197-b1df-b3a8b374e316"
+  }
 }
