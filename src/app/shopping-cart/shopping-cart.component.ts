@@ -1,7 +1,6 @@
 import { environment } from './../../environments/environment';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CartService } from '../cart.service';
-//import { PaymentService } from '../payment.service';
 import { ExternalLibraryService } from '../util';
 
 declare let Razorpay: any;
@@ -23,7 +22,6 @@ export class ShoppingCartComponent implements OnInit {
   title = 'samplepayment';
   constructor(
     private cartService: CartService,
-   // private paymentService: PaymentService,
     private cd: ChangeDetectorRef,
     private razorpayService: ExternalLibraryService
   ) { }
@@ -38,7 +36,7 @@ export class ShoppingCartComponent implements OnInit {
         this.products = cartItems;
         this.calculatePrice();
       });
-     // this.WindowRef = this.paymentService.WindowRef;
+    
 
       this.razorpayService
       .lazyLoadLibrary('https://checkout.razorpay.com/v1/checkout.js')
@@ -46,7 +44,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   RAZORPAY_OPTIONS = {
-    "key": "rzp_test_WMHWnR6EYJOqTX",
+    "key": "rzp_test_RdbpDuMzvF1nBu",
     "amount": "",
     "name": "kart",
     "order_id": "",
@@ -66,12 +64,9 @@ export class ShoppingCartComponent implements OnInit {
 
   public proceed() {
     this.RAZORPAY_OPTIONS.amount = this.totalPrice + '00';
-
     // binding this object to both success and dismiss handler
     this.RAZORPAY_OPTIONS['handler'] = this.razorPaySuccessHandler.bind(this);
-
     // this.showPopup();
-
     let razorpay = new Razorpay(this.RAZORPAY_OPTIONS)
     razorpay.open();
   }
@@ -133,17 +128,7 @@ export class ShoppingCartComponent implements OnInit {
       receipt: receiptNumber
     }
 
-   /* this.paymentService.createOrder(orderDetails)
-        .subscribe(order => {
-        console.log("TCL: CheckoutComponent -> initiatePaymentModal -> order", order)
-          var rzp1 = new this.WindowRef.Razorpay(this.preparePaymentDetails(order));
-          this.processingPayment = false;
-          rzp1.open(); 
-          event.preventDefault();
-        }, error => {
-        console.log("TCL: CheckoutComponent -> initiatePaymentModal -> error", error)
-
-        })*/
+  
 
    }
 
@@ -172,17 +157,7 @@ export class ShoppingCartComponent implements OnInit {
 
    handlePayment(response) {
 
-   /* this.paymentService.capturePayment({
-      amount: this.payableAmount,
-      payment_id: response.razorpay_payment_id
-    })
-      .subscribe(res => {
-        this.paymentResponse = res;
-        this.cd.detectChanges();
-       },
-      error => {
-        this.paymentResponse = error;
-      });*/
+   
   }
 
 }
